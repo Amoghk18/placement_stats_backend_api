@@ -12,6 +12,7 @@ dotenv.config({ path: "./config/config.env" });
 
 // routes
 const experiences = require('./routes/experiences');
+const charts = require('./routes/chart');
 
 // middleware imports
 const logger = require('./middleware/logger');
@@ -24,6 +25,7 @@ app.use(logger);
 
 // routing 
 app.use('/api/v1/experiences', experiences);
+app.use('/api/v1/charts', charts);
 
 // error Handler
 app.use(errorHandler);
