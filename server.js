@@ -13,6 +13,12 @@ dotenv.config({ path: "./config/config.env" });
 // routes
 const experiences = require('./routes/experiences');
 const charts = require('./routes/chart');
+const blogs = require('./routes/blog');
+const courses = require('./routes/course');
+const ebooks = require('./routes/ebook');
+const links = require('./routes/link');
+const schedules = require('./routes/schedule');
+const success_stories = require('./routes/success_story');
 
 // middleware imports
 const logger = require('./middleware/logger');
@@ -26,6 +32,12 @@ app.use(logger);
 // routing 
 app.use('/api/v1/experiences', experiences);
 app.use('/api/v1/charts', charts);
+app.use('/api/v1/blogs', blogs);
+app.use('/api/v1/courses', courses);
+app.use('/api/v1/ebooks', ebooks);
+app.use('/api/v1/links', links);
+app.use('/api/v1/schedules', schedules);
+app.use('/api/v1/successstories', success_stories);
 
 // error Handler
 app.use(errorHandler);
