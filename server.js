@@ -21,6 +21,7 @@ const schedules = require('./routes/schedule');
 const success_stories = require('./routes/success_story');
 const processes = require('./routes/process');
 const company_year = require('./routes/company_year');
+const auth = require('./routes/auth');
 
 // middleware imports
 const logger = require('./middleware/logger');
@@ -42,6 +43,7 @@ app.use('/api/v1/schedules', schedules);
 app.use('/api/v1/successstories', success_stories);
 app.use('/api/v1/process', processes);
 app.use('/api/v1/companyyear', company_year);
+app.use('/api/v1/auth', auth);
 
 // error Handler
 app.use(errorHandler);
