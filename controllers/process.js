@@ -5,7 +5,7 @@ const Process = require("../models/Process");
 // @route       GET  /api/v1/process
 // @access      student only
 exports.getProcess = asyncHandler(async (req, res, next) => {
-  const process = await Process.findOne({ name: req.body.name, year: req.body.year });
+  const process = await Process.findOne({ name: req.params.name, year: req.params.year });
   res.status(200).json({
     success: true,
     data: process,
