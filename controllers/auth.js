@@ -72,7 +72,8 @@ exports.loginS = asyncHandler(async (req, res, next) => {
 
     res.status(200).json({
         success: true,
-        token: token
+        token: token,
+        data: user
     });
 });
 
@@ -98,7 +99,8 @@ exports.loginR = asyncHandler(async (req, res, next) => {
 
     res.status(200).json({
         success: true,
-        token: token
+        token: token,
+        data: user
     });
 });
 
