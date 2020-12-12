@@ -56,7 +56,7 @@ exports.signupR = asyncHandler(async (req, res, next) => {
 exports.loginS = asyncHandler(async (req, res, next) => {
     const { usn, password } = req.body;
 
-    const user = await Student.findOne({ usn: usn }).select('+password');
+    const user = await Student.findOne({ usn: usn });
 
     if(!user){
         return next(new ErrorResponse('Invalid Credentials', 401));
@@ -83,7 +83,7 @@ exports.loginS = asyncHandler(async (req, res, next) => {
 exports.loginR = asyncHandler(async (req, res, next) => {
     const { email, password } = req.body;
 
-    const user = await Recruiter.findOne({ email: email }).select('+password');
+    const user = await Recruiter.findOne({ email: email });
 
     if(!user){
         return next(new ErrorResponse('Invalid Credentials', 401));
@@ -185,16 +185,16 @@ exports.resetPassword = asyncHandler(async (req, res, next) => {
     });
 });
 
-// @desc        reset password
+// @desc        update password
 // @route       PUT  /api/v1/auth/updatepassword
 // @access      private
 exports.updatePassword = asyncHandler(async (req, res, next) => {
     var user;
     if(req.body.usn){
-        user = await Student.findOne({ usn: req.body.usn }).select('+password');
+        user = await Student.findOne({ usn: req.body.usn });
     }
     else{
-        user = await Recruiter.findOne({ email: req.body.email }).select('+password');
+        user = await Recruiter.findOne({ email: req.body.email });
     }
 
     if(!user){
@@ -209,5 +209,27 @@ exports.updatePassword = asyncHandler(async (req, res, next) => {
     res.status(200).json({
         success: true,
         token: token
+    });
+});
+
+// @desc        update profile
+// @route       PUT  /api/v1/auth/updateprofile
+// @access      private
+exports.updateProfile = asyncHandler(async (req, res, next) => {
+    var user;
+    if(req.body.usn){
+        user = await Student.findOneAndUpdate({ usn: req.body.usn }, req.body, { new: true });
+    }
+    else{
+        user = await Recruiter.findOneAndUpdate({ email: req.body.email }, req.body, { new: true });
+    }
+
+    if(!user){
+        return next(new ErrorResponse('Invalid credentials', 401));
+    }
+
+    res.status(200).json({
+        success: true,
+        token: user
     });
 });
