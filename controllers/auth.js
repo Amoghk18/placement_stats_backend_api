@@ -224,17 +224,15 @@ exports.updateProfile = asyncHandler(async (req, res, next) => {
     newUser = {
       email: req.body.email,
       name: req.body.name,
-      usn: req.body.newUsn,
       sem: req.body.sem,
-      dept: req.body.dept,
+      dept: req.body.dept
     };
-  }
-  {
+  }else{
     newUser = {
       email: req.body.newEmail,
       name: req.body.name,
       position: req.body.position,
-      companyName: req.body.companyName,
+      companyName: req.body.companyName
     };
   }
   if (req.body.usn) {
