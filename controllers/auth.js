@@ -158,13 +158,13 @@ exports.resetPassword = asyncHandler(async (req, res, next) => {
         user = await Student.findOne({
             resetPasswordToken: resetPasswordToken,
             resetTokenExpire: { $gt: Date.now() }
-        });
+        }).select("+password");
     }
     else{
         user = await Recruiter.findOne({
             resetPasswordToken: resetPasswordToken,
             resetTokenExpire: { $gt: Date.now() }
-        });
+        }).select("+password");
     }
 
     if(!user){
@@ -191,10 +191,10 @@ exports.resetPassword = asyncHandler(async (req, res, next) => {
 exports.updatePassword = asyncHandler(async (req, res, next) => {
     var user;
     if(req.body.usn){
-        user = await Student.findOne({ usn: req.body.usn });
+        user = await Student.findOne({ usn: req.body.usn }).select("+password");
     }
     else{
-        user = await Recruiter.findOne({ email: req.body.email });
+        user = await Recruiter.findOne({ email: req.body.email }).select("+password");
     }
 
     if(!user){
