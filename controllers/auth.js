@@ -83,7 +83,7 @@ exports.loginS = asyncHandler(async (req, res, next) => {
 exports.loginR = asyncHandler(async (req, res, next) => {
     const { email, password } = req.body;
 
-    const user = await Recruiter.findOne({ email: email });
+    const user = await Recruiter.findOne({ email: email }).select("+password");
 
     if(!user){
         return next(new ErrorResponse('Invalid Credentials', 401));
