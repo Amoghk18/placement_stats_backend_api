@@ -16,7 +16,7 @@ const RecruiterSchema = new mongoose.Schema({
     },
     companyName: {
         type: String,
-        required: [true, 'USN is required'],
+        required: [true, 'Company Name is required'],
         trim: true
     },
     position: {
